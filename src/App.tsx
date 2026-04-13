@@ -2,8 +2,6 @@ import { useEffect, useState, useRef } from 'react';
 import { motion, useScroll, useSpring, AnimatePresence } from 'framer-motion';
 import { 
   Globe, 
-  MessageSquare, 
-  Mail, 
   Sparkles,
   ArrowRight,
   Code2,
