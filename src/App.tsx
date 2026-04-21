@@ -14,6 +14,21 @@ import {
 import profileImg from './assets/hero.png';
 import './index.css';
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 28 },
+  show: { opacity: 1, y: 0 }
+};
+
+const sectionStagger = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12
+    }
+  }
+};
+
 const LoadingScreen = () => {
   const [progress, setProgress] = useState(0);
 
@@ -59,14 +74,15 @@ const ProjectCard = ({ title, description, tags, delay }: any) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay }}
-      className="crystal-panel card-3d"
+      whileHover={{ y: -12, rotateX: 2, rotateY: -2 }}
+      className="crystal-panel card-3d project-card"
     >
-      <div className="badge" style={{ marginBottom: '15px' }}>Project</div>
-      <h3 style={{ fontSize: '1.8rem', marginBottom: '15px', fontWeight: 700 }}>{title}</h3>
-      <p style={{ color: '#64748b', marginBottom: '25px' }}>{description}</p>
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '30px' }}>
+      <div className="badge project-badge">Project</div>
+      <h3 className="project-title">{title}</h3>
+      <p className="project-description">{description}</p>
+      <div className="project-tags">
         {tags.map((tag: string) => (
-          <span key={tag} style={{ background: '#f1f5f9', padding: '5px 12px', borderRadius: '100px', fontSize: '0.8rem', color: '#334155', fontWeight: 600 }}>
+          <span key={tag} className="project-tag">
             {tag}
           </span>
         ))}
@@ -74,7 +90,7 @@ const ProjectCard = ({ title, description, tags, delay }: any) => {
       <motion.a 
         href="#"
         whileHover={{ x: 5 }}
-        style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#3b82f6', textDecoration: 'none', fontWeight: 700 }}
+        className="project-link"
       >
         View Details <ArrowRight size={18} />
       </motion.a>
@@ -85,21 +101,10 @@ const ProjectCard = ({ title, description, tags, delay }: any) => {
 const TechItem = ({ icon: Icon, label }: any) => (
   <motion.div 
     whileHover={{ y: -5 }}
-    style={{ 
-      display: 'flex', 
-      alignItems: 'center', 
-      gap: '8px', 
-      padding: '8px 16px', 
-      background: 'white', 
-      borderRadius: '100px',
-      border: '1px solid #e2e8f0',
-      boxShadow: '0 5px 15px rgba(0,0,0,0.03)',
-      fontSize: '0.9rem',
-      fontWeight: 600,
-      color: '#334155'
-    }}
+    transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+    className="tech-pill"
   >
-    <Icon size={16} color="#3b82f6" />
+    <Icon size={16} color="#3f68ff" />
     {label}
   </motion.div>
 );
@@ -173,83 +178,76 @@ function App() {
           transition={{ duration: 1 }}
         >
           <nav>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <div style={{ width: '40px', height: '40px', background: '#3b82f6', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 700 }}>TL</div>
-              <span style={{ fontWeight: 800, fontSize: '1.25rem' }}>Tuan Le</span>
+            <div className="nav-brand-wrap">
+              <div className="nav-logo">TL</div>
+              <span className="nav-brand">Tuan Le</span>
             </div>
             <ul className="nav-links">
-              <li><a href="#about" style={{ fontWeight: 600 }}>About</a></li>
-              <li><a href="#experience" style={{ fontWeight: 600 }}>Exp</a></li>
-              <li><a href="#projects" style={{ fontWeight: 600 }}>Work</a></li>
-              <li><a href="#skills" style={{ fontWeight: 600 }}>Skills</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#experience">Exp</a></li>
+              <li><a href="#projects">Work</a></li>
+              <li><a href="#skills">Skills</a></li>
             </ul>
             <motion.button 
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              style={{ 
-                background: '#1e293b', 
-                color: 'white', 
-                border: 'none', 
-                padding: '12px 28px', 
-                borderRadius: '100px', 
-                fontWeight: 700 
-              }}
+              className="nav-cta"
             >
               Contact Me
             </motion.button>
           </nav>
 
-          <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
-            <section className="hero">
+          <main className="page-shell">
+            <section id="about" className="hero">
               <motion.div 
                 className="hero-content"
-                initial={{ opacity: 0, x: -100 }}
-                animate={{ opacity: 1, x: 0 }}
+                variants={sectionStagger}
+                initial="hidden"
+                animate="show"
                 transition={{ duration: 1, delay: 0.2 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '25px' }}>
-                  <div style={{ padding: '6px 18px', background: '#3b82f6', color: 'white', borderRadius: '100px', fontSize: '0.85rem', fontWeight: 800 }}>
+                <motion.div className="hero-kicker-row" variants={fadeUp}>
+                  <div className="hero-kicker">
                     NORTHEASTERN UNIVERSITY
                   </div>
                   <Sparkles size={18} color="#f59e0b" fill="#f59e0b" />
-                </div>
+                </motion.div>
                 
-                <h1 className="hero-title">
+                <motion.h1 className="hero-title" variants={fadeUp}>
                   Software & <br />
                   <span className="gradient-text">AI Engineer</span>
-                </h1>
+                </motion.h1>
                 
-                <p style={{ fontSize: '1.5rem', color: '#475569', marginBottom: '40px', maxWidth: '650px', fontWeight: 600, lineHeight: '1.4' }}>
+                <motion.p className="hero-lead" variants={fadeUp}>
                   Building scalable agents and full-stack ecosystems. 
                   Bridging <span style={{ color: '#3b82f6' }}>Machine Intelligence</span> with <span style={{ color: '#8b5cf6' }}>Modern Architecture.</span>
-                </p>
+                </motion.p>
 
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', marginBottom: '50px' }}>
+                <motion.div className="tech-grid" variants={fadeUp}>
                   <TechItem icon={Globe} label="Next.js" />
                   <TechItem icon={Code2} label="Python" />
                   <TechItem icon={Zap} label="LangChain" />
                   <TechItem icon={Cpu} label="TensorFlow" />
                   <TechItem icon={Database} label="PostgreSQL" />
                   <TechItem icon={Layers} label="Docker" />
-                </div>
+                </motion.div>
 
-                <div style={{ display: 'flex', gap: '20px' }}>
+                <motion.div className="hero-actions" variants={fadeUp}>
                   <motion.button 
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="crystal-panel"
-                    style={{ background: '#3b82f6', color: 'white', padding: '20px 45px', border: 'none', fontWeight: 800, fontSize: '1.1rem' }}
+                    className="btn btn-primary"
                   >
                     Work Experience
                   </motion.button>
                   <motion.button 
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    style={{ background: 'transparent', padding: '20px 45px', border: '2px solid #cbd5e1', borderRadius: '24px', fontWeight: 800 }}
+                    className="btn btn-secondary"
                   >
                     Download CV
                   </motion.button>
-                </div>
+                </motion.div>
               </motion.div>
 
               <motion.div 
@@ -258,15 +256,15 @@ function App() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1, delay: 0.4 }}
               >
-                <div className="main-img-wrapper crystal-panel" style={{ borderRadius: '50px', background: 'white' }}>
-                  <div className="photo-badge" style={{ zIndex: 10 }}>GPA 4.0/4.0 Scholar</div>
+                <div className="main-img-wrapper crystal-panel">
+                  <div className="photo-badge">GPA 4.0/4.0 Scholar</div>
                   <img src={profileImg} alt="Tuan Le" className="main-img" />
                 </div>
               </motion.div>
             </section>
 
-            <section style={{ padding: '80px 0' }}>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '30px' }}>
+            <section id="skills" className="stats-section">
+              <div className="stats-grid">
                 {[
                   { label: 'TOP-TIER GPA', value: '4.0', sub: 'Northeastern University' },
                   { label: 'SYSTEMS', value: '100K+', sub: 'Market Data Points' },
@@ -275,6 +273,11 @@ function App() {
                   <motion.div 
                     key={i}
                     className="crystal-panel"
+                    initial={{ opacity: 0, y: 24 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.45, delay: i * 0.12 }}
+                    whileHover={{ y: -8 }}
                     style={{ padding: '40px 30px', textAlign: 'center' }}
                   >
                     <div style={{ fontSize: '0.85rem', color: '#64748b', fontWeight: 800, textTransform: 'uppercase', marginBottom: '12px' }}>{stat.label}</div>
@@ -285,41 +288,49 @@ function App() {
               </div>
             </section>
 
-            <section id="experience" style={{ padding: '150px 0' }}>
-              <div style={{ textAlign: 'center', marginBottom: '80px' }}>
-                <h2 className="hero-title" style={{ fontSize: '4rem' }}>Experience</h2>
+            <section id="experience" className="experience-section">
+              <div className="section-head">
+                <h2 className="hero-title section-title">Experience</h2>
               </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
+              <div className="experience-list">
                 {experiences.map((exp, i) => (
-                  <div key={i} className="crystal-panel" style={{ padding: '50px', display: 'flex', justifyContent: 'space-between', gap: '20px' }}>
-                    <div style={{ flex: 1 }}>
-                      <h3 style={{ fontSize: '2.2rem', fontWeight: 800 }}>{exp.company}</h3>
-                      <p className="gradient-text" style={{ fontWeight: 800 }}>{exp.role}</p>
-                      <p style={{ color: '#64748b', marginTop: '8px' }}>{exp.summary}</p>
-                      <ul style={{ marginTop: '14px', paddingLeft: '20px', color: '#475569', display: 'grid', gap: '6px' }}>
+                  <motion.div 
+                    key={i}
+                    className="crystal-panel exp-card"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: i * 0.1 }}
+                  >
+                    <div className="exp-content">
+                      <h3 className="exp-company">{exp.company}</h3>
+                      <p className="gradient-text exp-role">{exp.role}</p>
+                      <p className="exp-summary">{exp.summary}</p>
+                      <ul className="exp-tasks">
                         {exp.tasks.map((task) => (
                           <li key={task}>{task}</li>
                         ))}
                       </ul>
                     </div>
                     <div className="badge">{exp.date}</div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </section>
 
-            <section id="projects" style={{ padding: '150px 0' }}>
-              <h2 style={{ fontSize: '3.5rem', fontWeight: 800, marginBottom: '60px' }}>Featured Works</h2>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px' }}>
+            <section id="projects" className="projects-section">
+              <h2 className="projects-title">Featured Works</h2>
+              <div className="project-grid">
                 <ProjectCard title="FinDeep" description="Multi-agent LLM systems." tags={["Python", "LangChain"]} delay={0.1} />
                 <ProjectCard title="Recipe Gen" description="REST API based discovery." tags={["Node.js", "React"]} delay={0.2} />
               </div>
             </section>
             
-            <section id="contact" style={{ padding: '150px 0 100px 0', textAlign: 'center' }}>
-              <div className="crystal-panel" style={{ padding: '120px 40px', background: '#0f172a', color: 'white' }}>
-                <h2 style={{ fontSize: '4.5rem', fontWeight: 800 }}>Let's Build.</h2>
-                <motion.a href="mailto:contact@tuanle.dev" className="crystal-panel" style={{ padding: '22px 70px', background: 'white', color: 'black', textDecoration: 'none', fontWeight: 900, display: 'inline-block', marginTop: '40px' }}>
+            <section id="contact" className="contact-section">
+              <div className="crystal-panel contact-panel">
+                <h2 className="contact-title">Let&apos;s Build.</h2>
+                <p className="contact-sub">Fast execution, clear ownership, and deep engineering craft for AI-native products.</p>
+                <motion.a href="mailto:contact@tuanle.dev" className="contact-link">
                   Start Conversation
                 </motion.a>
               </div>
