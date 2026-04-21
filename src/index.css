@@ -225,6 +225,10 @@ nav {
   gap: 16px;
 }
 
+.hero-actions .btn {
+  min-width: 0;
+}
+
 .btn {
   padding: 17px 30px;
   border-radius: 18px;
@@ -601,6 +605,10 @@ nav {
     flex-wrap: wrap;
   }
 
+  .hero-content {
+    width: 100%;
+  }
+
   .hero-lead {
     margin-left: auto;
     margin-right: auto;
@@ -626,6 +634,173 @@ nav {
 
   .exp-card {
     padding: 30px;
+  }
+}
+
+@media (max-width: 640px) {
+  .page-shell {
+    padding: 0 14px;
+  }
+
+  nav {
+    width: calc(100% - 16px);
+    top: 10px;
+    padding: 10px 12px;
+    border-radius: 20px;
+    gap: 10px;
+  }
+
+  .nav-logo {
+    width: 36px;
+    height: 36px;
+    border-radius: 11px;
+    font-size: 0.92rem;
+  }
+
+  .nav-brand {
+    font-size: 0.95rem;
+  }
+
+  .nav-cta {
+    padding: 9px 12px;
+    font-size: 0.72rem;
+    white-space: nowrap;
+  }
+
+  .hero {
+    padding-top: 92px;
+    gap: 18px;
+  }
+
+  .hero-kicker {
+    padding: 6px 12px;
+    font-size: 0.7rem;
+  }
+
+  .hero-kicker-row {
+    margin-bottom: 14px;
+  }
+
+  .hero-title {
+    margin-bottom: 16px;
+    line-height: 0.98;
+  }
+
+  .hero-lead {
+    font-size: 0.98rem;
+    margin-bottom: 22px;
+  }
+
+  .tech-grid {
+    gap: 8px;
+    margin-bottom: 26px;
+  }
+
+  .tech-pill {
+    padding: 7px 12px;
+    font-size: 0.8rem;
+  }
+
+  .hero-actions {
+    width: 100%;
+    gap: 10px;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 0.92rem;
+    border-radius: 14px;
+  }
+
+  .main-img-wrapper {
+    width: min(92vw, 390px);
+    height: min(124vw, 500px);
+    border-radius: 28px;
+  }
+
+  .photo-badge {
+    right: 8px;
+    top: 12px;
+    padding: 6px 12px;
+    font-size: 0.68rem;
+  }
+
+  .stats-section,
+  .experience-section,
+  .projects-section,
+  .contact-section {
+    padding-top: 72px;
+    padding-bottom: 68px;
+  }
+
+  .exp-card,
+  .card-3d,
+  .contact-panel {
+    padding: 22px;
+  }
+
+  .projects-title {
+    margin-bottom: 24px;
+  }
+
+  .project-title {
+    font-size: 1.35rem;
+  }
+
+  .contact-link {
+    width: 100%;
+    padding: 14px 16px;
+  }
+}
+
+@media (max-width: 430px) {
+  .page-shell {
+    padding: 0 12px;
+  }
+
+  nav {
+    width: calc(100% - 12px);
+    padding: 8px 10px;
+    gap: 8px;
+  }
+
+  .nav-brand {
+    display: none;
+  }
+
+  .nav-cta {
+    padding: 8px 10px;
+    font-size: 0.68rem;
+  }
+
+  .hero {
+    padding-top: 84px;
+  }
+
+  .hero-title {
+    font-size: clamp(2.1rem, 12vw, 2.8rem);
+  }
+
+  .hero-lead {
+    font-size: 0.92rem;
+  }
+
+  .tech-pill {
+    font-size: 0.76rem;
+  }
+
+  .exp-card,
+  .card-3d,
+  .contact-panel,
+  .stats-grid .crystal-panel {
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  .badge {
+    font-size: 0.72rem;
+    padding: 5px 10px;
   }
 }
 
