@@ -104,6 +104,33 @@ const TechItem = ({ icon: Icon, label }: any) => (
   </motion.div>
 );
 
+const experiences = [
+  {
+    company: 'Finbud AI',
+    role: 'Software Engineer Intern',
+    date: 'Jan 2026 - Present',
+    summary: 'Built AI products end to end across chatbot intelligence, RAG reliability, and production backend flows.',
+    tasks: [
+      'Developed chatbot product flows for real user prompts and response quality improvements.',
+      'Built a RAG pipeline to increase analysis accuracy and reduce model hallucination in financial contexts.',
+      'Implemented React + Node.js features end to end, from UI components to backend service integration.',
+      'Collaborated on backend APIs and deployment workflows to ship AI features into production faster.'
+    ]
+  },
+  {
+    company: 'Career Hub',
+    role: 'Full-stack Intern',
+    date: 'Sep 2025 - Dec 2025',
+    summary: 'Delivered full-stack product features with strong focus on reliability, UX clarity, and documentation.',
+    tasks: [
+      'Built and maintained frontend modules with React for student-facing product experiences.',
+      'Implemented backend endpoints and business logic for feature delivery and data consistency.',
+      'Supported technical documentation to speed up onboarding and cross-team handoff.',
+      'Worked across product and engineering feedback loops to iterate features quickly.'
+    ]
+  }
+];
+
 function App() {
   const [loading, setLoading] = useState(true);
   const { scrollYProgress } = useScroll();
@@ -263,15 +290,17 @@ function App() {
                 <h2 className="hero-title" style={{ fontSize: '4rem' }}>Experience</h2>
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
-                {[
-                  { company: "FinbudAI", role: "Software Engineer Intern", date: "Jan 2026 – Pres", desc: "Architected quant-trading platforms." },
-                  { company: "Career Hub", role: "Full-stack Intern", date: "Sep – Dec 2025", desc: "Led UI overhaul & tech docs." }
-                ].map((exp, i) => (
-                  <div key={i} className="crystal-panel" style={{ padding: '50px', display: 'flex', justifyContent: 'space-between' }}>
-                    <div>
+                {experiences.map((exp, i) => (
+                  <div key={i} className="crystal-panel" style={{ padding: '50px', display: 'flex', justifyContent: 'space-between', gap: '20px' }}>
+                    <div style={{ flex: 1 }}>
                       <h3 style={{ fontSize: '2.2rem', fontWeight: 800 }}>{exp.company}</h3>
                       <p className="gradient-text" style={{ fontWeight: 800 }}>{exp.role}</p>
-                      <p style={{ color: '#64748b' }}>{exp.desc}</p>
+                      <p style={{ color: '#64748b', marginTop: '8px' }}>{exp.summary}</p>
+                      <ul style={{ marginTop: '14px', paddingLeft: '20px', color: '#475569', display: 'grid', gap: '6px' }}>
+                        {exp.tasks.map((task) => (
+                          <li key={task}>{task}</li>
+                        ))}
+                      </ul>
                     </div>
                     <div className="badge">{exp.date}</div>
                   </div>

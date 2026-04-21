@@ -9,6 +9,7 @@
   --glass: rgba(255, 255, 255, 0.7);
   --glass-border: rgba(255, 255, 255, 0.4);
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  --hero-shift-x: -8%;
 }
 
 * {
@@ -163,14 +164,16 @@ nav {
 }
 
 .main-img {
-  width: 100%;
+  width: 112%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
+  transform: translateX(var(--hero-shift-x)) scale(1.02);
   transition: transform 0.5s ease;
 }
 
 .main-img-wrapper:hover .main-img {
-  transform: scale(1.05);
+  transform: translateX(var(--hero-shift-x)) scale(1.07);
 }
 
 /* Projects and Cards */
@@ -278,6 +281,7 @@ nav {
 
 /* Mobile */
 @media (max-width: 968px) {
+  :root { --hero-shift-x: -6%; }
   .hero { flex-direction: column; text-align: center; }
   .hero-title { font-size: 3.5rem; }
   .main-img-wrapper { width: 100%; height: 400px; margin-top: 50px; }
